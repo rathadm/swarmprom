@@ -14,8 +14,14 @@ alerting:
   - static_configs:
     - targets:
       - alertmanager:9093
-
 scrape_configs:
+  - job_name: 'rabbit'
+    dns_sd_configs:
+    - names:
+      - 'tasks.rabbit'
+      type: 'A'
+      port: 15692
+
   - job_name: 'prometheus'
     static_configs:
       - targets: ['localhost:9090']
