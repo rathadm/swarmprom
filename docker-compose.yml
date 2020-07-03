@@ -4,8 +4,8 @@ networks:
   net:
     driver: overlay
     attachable: true
-  external:
-    name:  rabbitmq-network
+  rabbitmq-network:
+    driver: overlay
 
 volumes:
     prometheus: {}
