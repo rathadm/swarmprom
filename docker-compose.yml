@@ -1,11 +1,13 @@
 version: "3.3"
 
 networks:
+ external:
+   name: rabbitmq-network
   net:
     driver: overlay
     attachable: true
-  rabbitmq-network:
-    driver: overlay
+  
+    
 
 volumes:
     prometheus: {}
