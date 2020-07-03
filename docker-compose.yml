@@ -150,6 +150,8 @@ services:
     image: 172.16.197.30:5000/rath/prom:latest	
     networks:
       - net
+      external:
+      name: rabbitmq-network
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
