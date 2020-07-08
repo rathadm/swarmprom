@@ -4,7 +4,9 @@ networks:
   net:
     driver: overlay
     attachable: true
-  
+  rabbitmq-net:
+    external: true
+    name: rabbitmq-network
     
 
 volumes:
@@ -152,6 +154,7 @@ services:
     image: 172.16.197.30:5000/rath/prom:latest	
     networks:
       - net
+      - rabbitmq-net
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
