@@ -10,7 +10,8 @@ networks:
     
 
 volumes:
-    prometheus: {}
+    prometheus:
+      external: true
     grafana: {}
     alertmanager: {}
 
