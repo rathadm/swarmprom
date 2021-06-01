@@ -5,21 +5,29 @@ global:
   external_labels:
     monitor: 'promswarm'
 
-rule_files:
-  - "swarm_node.rules.yml"
-  - "swarm_task.rules.yml"
 
 alerting:
   alertmanagers:
   - static_configs:
     - targets:
       - alertmanager:9093
+
 scrape_configs:
-  - job_name: 'rabbitmq-exporter'
-    static_configs:
-      - targets:
-       - 'rabbitmq-exporter:15692'
   
+
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'rabbitmq'
+    dns_sd_configs:
+    - names:
+      - 'tasks.rabbitmq-01'
+      - 'tasks.rabbitmq-02'
+      - 'tasks.rabbitmq-03'
+      type: 'A'
+      port: 15692
+      
   - job_name: 'dockerd-exporter'
     dns_sd_configs:
     - names:
@@ -40,5 +48,3 @@ scrape_configs:
       - 'tasks.node-exporter'
       type: 'A'
       port: 9100
-
-
